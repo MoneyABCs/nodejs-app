@@ -366,15 +366,15 @@ var cronJob = function(){
 }
 cronJob();
 
-var schedule = require('node-schedule');
-var l = schedule.scheduleJob('2 * * * *',function(){
-    console.log("Log for every 2 min")
-});
-
-var cron = require('node-cron');
-cron.schedule('1 * * * *',function(){
-    console.log("runnig evryr 1 min")
-});
+// var schedule = require('node-schedule');
+// var l = schedule.scheduleJob('2 * * * *',function(){
+//     console.log("Log for every 2 min")
+// });
+//
+// var cron = require('node-cron');
+// cron.schedule('1 * * * *',function(){
+//     console.log("runnig evryr 1 min")
+// });
 
 var GoogleSearch = require('google-search');
 var customsearch = google.customsearch('v1');
