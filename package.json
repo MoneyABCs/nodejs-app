@@ -18,6 +18,7 @@
     "alexa-traffic-rank": "^1.0.1",
     "body-parser": "^1.15.0",
     "express": "~3.4.4",
+    "ejs": "^2.4.1",
     "google-search": "0.0.3",
     "google-trends-api": ">=1.2.3",
     "googleapis": "^4.0.0",
