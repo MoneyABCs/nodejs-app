@@ -355,7 +355,7 @@ var cronJob = function(){
     //cron job
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [0, new schedule.Range(0, 6)];
-    rule.hour = 16;
+    rule.hour = 17;
     rule.minute = 30;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail');
@@ -366,15 +366,15 @@ var cronJob = function(){
 }
 cronJob();
 
-// var schedule = require('node-schedule');
-// var l = schedule.scheduleJob('2 * * * *',function(){
-//     console.log("Log for every 2 min")
-// });
-//
-// var cron = require('node-cron');
-// cron.schedule('1 * * * *',function(){
-//     console.log("runnig evryr 1 min")
-// });
+var schedule = require('node-schedule');
+var l = schedule.scheduleJob('2 * * * *',function(){
+    console.log("Log for every 2 min")
+});
+
+var cron = require('node-cron');
+cron.schedule('1 * * * *',function(){
+    console.log("runnig evryr 1 min")
+});
 
 var GoogleSearch = require('google-search');
 var customsearch = google.customsearch('v1');
