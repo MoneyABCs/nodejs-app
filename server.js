@@ -348,17 +348,18 @@ var fileData = "";
 
 
  }); */
-
+var AlgoStartTime = 0;
 var cronJob = function(){
     console.log('m here');
     var schedule = require('node-schedule');
     //cron job
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [0, new schedule.Range(0, 6)];
-    rule.hour = 16;
-    rule.minute = 25;
+    rule.hour = 17;
+    rule.minute = 44;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail');
+        AlgoStartTime = Date.now();
         algoTrial();
 
     });
@@ -1099,7 +1100,8 @@ var calculateRank = function(){
                 resp.save();
             }
         }
-        console.log("Time Taken for Algo ::"+(Date.now() - AlgoStartTime))
+        var timetakenalgo = new Date(Date.now() - AlgoStartTime);
+        console.log("Time Taken for Algo ::"+timetakenalgo.getHours()+" H "+timetakenalgo.getMinutes()+ " M "+timetakenalgo.getSeconds()+ " S ")
     });
 }
 //calculateRank();
