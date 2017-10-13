@@ -356,7 +356,7 @@ var cronJob = function(){
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [0, new schedule.Range(0, 6)];
     rule.hour = 16;
-    rule.minute = 10;
+    rule.minute = 25;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail');
         algoTrial();
@@ -379,9 +379,9 @@ cron.schedule('1 * * * *',function(){
 var GoogleSearch = require('google-search');
 var customsearch = google.customsearch('v1');
 
-// const CX =  '013944438288227651400:j_0h0-dl6um'; //'009350078174429104185:0ikpzx1qvau'; //'009350078174429104185:ipchhljo5xm';   // search engine ID
+const CX =  '013944438288227651400:j_0h0-dl6um'; //'009350078174429104185:0ikpzx1qvau'; //'009350078174429104185:ipchhljo5xm';   // search engine ID
 // //const API_KEY = 'AIzaSyAWZQCb6PFB1Oq1ZqUR6oJLhgwiTlgIKeY';
-// const API_KEY = 'AIzaSyD_65dKKxS7Ah2-PEJGYq0UnGJj3eMME8Y';
+const API_KEY = 'AIzaSyD_65dKKxS7Ah2-PEJGYq0UnGJj3eMME8Y';
 
 //browser key
 var searchObj = [
