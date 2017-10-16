@@ -355,8 +355,8 @@ var cronJob = function(){
     //cron job
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = [0, new schedule.Range(0, 6)];
-    rule.hour = 17;
-    rule.minute = 44;
+    rule.hour = 04;
+    rule.minute = 00;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail');
         AlgoStartTime = Date.now();
