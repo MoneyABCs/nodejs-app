@@ -1119,6 +1119,7 @@ var calculateRank = function(){
     });
 }
 //calculateRank();
+
 var trialFinalD = [];
 var flag = 0;
 var fetchArticlesSearchResults = function(topNine){
