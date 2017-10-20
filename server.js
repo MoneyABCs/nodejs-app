@@ -355,15 +355,35 @@ var cronJob = function(){
     //cron job
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = new schedule.Range(0, 6);
-    rule.hour = 04;
+    rule.hour = 22;
     rule.minute = 00;
     var j = schedule.scheduleJob(rule, function(){
-        console.log('start Algo trail');
+        console.log('start Algo trail 10 PM');
         AlgoStartTime = Date.now();
         algoTrial();
 
     });
 
+    rule = new schedule.RecurrenceRule();
+    rule.dayOfWeek = new schedule.Range(0, 6);
+    rule.hour = 06;
+    rule.minute = 00;
+    console.log(rule);
+    var ksch = schedule.scheduleJob(rule, function(){
+        console.log('start Algo trail 6 AM');
+        AlgoStartTime = Date.now();
+        algoTrial();
+    });
+
+    rule = new schedule.RecurrenceRule();
+    rule.dayOfWeek = new schedule.Range(0, 6);
+    rule.hour = 14;
+    rule.minute = 00;
+    var lsch = schedule.scheduleJob(rule, function(){
+        console.log('start Algo trail 2 PM');
+        AlgoStartTime = Date.now();
+        algoTrial();
+    });
 }
 
 cronJob();
