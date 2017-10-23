@@ -353,18 +353,18 @@ var cronJob = function(){
     console.log('m here');
     var schedule = require('node-schedule');
     //cron job
-    var rule = new schedule.RecurrenceRule();
-    rule.dayOfWeek = new schedule.Range(0, 6);
-    // rule.hour = 22;
-    // rule.minute = 00;
-    rule.hour = 16;
-    rule.minute = 45;
-    var j = schedule.scheduleJob(rule, function(){
-        console.log('start Algo trail 10 PM');
-        AlgoStartTime = Date.now();
-        algoTrial();
-
-    });
+    // var rule = new schedule.RecurrenceRule();
+    // rule.dayOfWeek = new schedule.Range(0, 6);
+    // // rule.hour = 22;
+    // // rule.minute = 00;
+    // rule.hour = 16;
+    // rule.minute = 45;
+    // var j = schedule.scheduleJob(rule, function(){
+    //     console.log('start Algo trail 10 PM');
+    //     AlgoStartTime = Date.now();
+    //     algoTrial();
+    //
+    // });
 
     rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = new schedule.Range(0, 6);
