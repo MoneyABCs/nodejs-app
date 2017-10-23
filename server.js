@@ -1280,6 +1280,10 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
+console.log('start Algo on restart');
+AlgoStartTime = Date.now();
+algoTrial();
+
 app.listen(port, ip);
 // require('node-monkey').start({host: ip, port:3003});
 console.log('Server running on http://%s:%s', ip, port);
