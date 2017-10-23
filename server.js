@@ -353,25 +353,25 @@ var cronJob = function(){
     console.log('m here');
     var schedule = require('node-schedule');
     //cron job
-    // var rule = new schedule.RecurrenceRule();
-    // rule.dayOfWeek = new schedule.Range(0, 6);
-    // // rule.hour = 22;
-    // // rule.minute = 00;
-    // rule.hour = 16;
-    // rule.minute = 45;
-    // var j = schedule.scheduleJob(rule, function(){
-    //     console.log('start Algo trail 10 PM');
-    //     AlgoStartTime = Date.now();
-    //     algoTrial();
-    //
-    // });
+    var rule = new schedule.RecurrenceRule();
+    rule.dayOfWeek = new schedule.Range(0, 6);
+    rule.hour = 22;
+    rule.minute = 00;
+    // rule.hour = 12;
+    // rule.minute = 54;
+    var j = schedule.scheduleJob(rule, function(){
+        console.log('start Algo trail 10 PM');
+        AlgoStartTime = Date.now();
+        algoTrial();
+
+    });
 
     rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = new schedule.Range(0, 6);
-    // rule.hour = 06;
-    // rule.minute = 00;
-    rule.hour = 17;
-    rule.minute = 15;
+    rule.hour = 06;
+    rule.minute = 00;
+    // rule.hour = 17;
+    // rule.minute = 15;
     console.log(rule);
     var ksch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 6 AM');
@@ -381,10 +381,10 @@ var cronJob = function(){
 
     rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = new schedule.Range(0, 6);
-    // rule.hour = 14;
-    // rule.minute = 00;
-    rule.hour = 17;
-    rule.minute = 35;
+    rule.hour = 14;
+    rule.minute = 00;
+    // rule.hour = 17;
+    // rule.minute = 35;
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
@@ -1286,9 +1286,9 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-// console.log('start Algo on restart');
-// AlgoStartTime = Date.now();
-// algoTrial();
+console.log('start Algo on restart');
+AlgoStartTime = Date.now();
+algoTrial();
 
 app.listen(port, ip);
 // require('node-monkey').start({host: ip, port:3003});
