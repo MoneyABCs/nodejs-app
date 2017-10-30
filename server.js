@@ -392,7 +392,7 @@ var cronJob = function(){
     // rule.hour = 19;
     // rule.minute = 00;
     rule.hour = 20;
-    rule.minute = 20;
+    rule.minute = 40;
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
