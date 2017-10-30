@@ -389,8 +389,10 @@ var cronJob = function(){
     // rule.hour = 14;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 19;
-    rule.minute = 00;
+    // rule.hour = 19;
+    // rule.minute = 00;
+    rule.hour = 20;
+    rule.minute = 20;
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
@@ -425,7 +427,7 @@ cronJob();
 
 var GoogleSearch = require('google-search');
 var customsearch = google.customsearch('v1');
-
+//https://developers.google.com/custom-search/json-api/v1/reference/cse/list
 const CX =  '013944438288227651400:j_0h0-dl6um'; //'009350078174429104185:0ikpzx1qvau'; //'009350078174429104185:ipchhljo5xm';   // search engine ID
 // //const API_KEY = 'AIzaSyAWZQCb6PFB1Oq1ZqUR6oJLhgwiTlgIKeY';
 const API_KEY = 'AIzaSyD_65dKKxS7Ah2-PEJGYq0UnGJj3eMME8Y';
@@ -789,12 +791,12 @@ finalD = [];
 var queryData = [],queryName = "";
 
 finalres = [];
-var algoTrialFlag1 = 0;
+// var algoTrialFlag1 = 0;
 var algoTrial = function(){
     console.log("inside algo trial");
-    if(algoTrialFlag1 == 0){
+    // if(algoTrialFlag1 == 0){
         console.log("inside");
-        algoTrialFlag1 = 1;
+        // algoTrialFlag1 = 1;
         var query = "";
         var options;
         var loopVar = 1;
@@ -851,7 +853,7 @@ var algoTrial = function(){
                 api_v2(query);
             }
         }, 10000); //1minutes
-    }
+    // }
 }
 //algoTrial();
 //VERSION 1
@@ -1188,7 +1190,11 @@ var fetchArticlesSearchResults = function(topNine){
             if(i<searchTopics.length){
                 query = searchTopics[i];
                 console.log(query);
-                customsearch.cse.list({ cx: CX, q: query, auth: API_KEY ,dateRestrict: "d1"}, function(err, resp) {
+                // orTerms: "Finance"
+                //dateRestrict - Restricts results to URLs based on date
+                //hq - Appends the specified query terms to the query, as if they were combined with a logical AND operator.
+                //safe - Search safety level
+                customsearch.cse.list({ cx: CX, q: query, auth: API_KEY ,dateRestrict: "d1",hq: "Finance",safe: "high"}, function(err, resp) {
                     //res.json(resp);
                     finalData.push(resp);
                     if (err) {
