@@ -389,10 +389,8 @@ var cronJob = function(){
     // rule.hour = 14;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    // rule.hour = 19;
-    // rule.minute = 00;
-    rule.hour = 20;
-    rule.minute = 40;
+    rule.hour = 19;
+    rule.minute = 00;
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
@@ -809,6 +807,9 @@ var algoTrial = function(){
                     if (err) throw err
                     console.log('Trends File Done!')
                 })
+                console.log("----------------");
+                console.log(algoTrialFlag);
+                console.log("----------------");
                 if(algoTrialFlag == 0){
                     algoTrialFlag=1;
                     clearInterval(myVar);
@@ -1298,9 +1299,9 @@ initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
 
-console.log('start Algo on restart');
-AlgoStartTime = Date.now();
-algoTrial();
+// console.log('start Algo on restart');
+// AlgoStartTime = Date.now();
+// algoTrial();
 
 app.listen(port, ip);
 // require('node-monkey').start({host: ip, port:3003});
