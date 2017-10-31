@@ -359,8 +359,10 @@ var cronJob = function(){
     // rule.hour = 22;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 03;
-    rule.minute = 00;
+    // rule.hour = 03;
+    // rule.minute = 00;
+    rule.hour = 15;
+    rule.minute = 25;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 10 PM');
         AlgoStartTime = Date.now();
@@ -374,8 +376,10 @@ var cronJob = function(){
     // rule.hour = 06;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 11;
-    rule.minute = 00;
+    // rule.hour = 11;
+    // rule.minute = 00;
+    rule.hour = 15;
+    rule.minute = 50;
     console.log(rule);
     var ksch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 6 AM');
@@ -788,11 +792,13 @@ finalD = [];
 
 var queryData = [],queryName = "";
 
-finalres = [];
+// finalres = [];
 // var algoTrialFlag1 = 0;
 var algoTrial = function(){
     console.log("inside algo trial");
     // if(algoTrialFlag1 == 0){
+        var finalres = [];
+
         console.log("inside");
         // algoTrialFlag1 = 1;
         var query = "";
@@ -800,6 +806,10 @@ var algoTrial = function(){
         var loopVar = 1;
         var path1,options = {host: '',path: ""};
         var algoTrialFlag = 0;
+
+        //fetchArticlesSearchResults var
+        var trialFinalD = [];
+        var flag = 0;
         //res.json("algooooooooo trialllllllllllllllllllll");
         var myVar  = setInterval(function () {
             if(loopVar >= 161){
@@ -1155,8 +1165,8 @@ var calculateRank = function(){
 }
 //calculateRank();
 
-var trialFinalD = [];
-var flag = 0;
+// var trialFinalD = [];
+// var flag = 0;
 var fetchArticlesSearchResults = function(topNine){
     if(flag == 0){
         var searchTopics = [];
