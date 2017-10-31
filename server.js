@@ -48,6 +48,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
 
   }
 }
+
 var db = null,
     dbDetails = new Object();
 
@@ -361,8 +362,8 @@ var cronJob = function(){
     //////Server timing - UTC////////
     // rule.hour = 03;
     // rule.minute = 00;
-    rule.hour = 15;
-    rule.minute = 47;
+    rule.hour = 17;
+    rule.minute = 15;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 10 PM');
         AlgoStartTime = Date.now();
@@ -378,8 +379,8 @@ var cronJob = function(){
     //////Server timing - UTC////////
     // rule.hour = 11;
     // rule.minute = 00;
-    rule.hour = 16;
-    rule.minute = 10;
+    rule.hour = 17;
+    rule.minute = 40;
     console.log(rule);
     var ksch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 6 AM');
@@ -1168,7 +1169,7 @@ var flag = 0;
 var fetchArticlesSearchResults = function(topNine){
     if(flag == 0){
         var searchTopics = [];
-        flag=1;
+        // flag=1;
         console.log("printing the values of v.........................")
         for(var i =0;i<topNine.length;i++){
             console.log("fetchArticlesSearchResults: "+ topNine[i].f)
