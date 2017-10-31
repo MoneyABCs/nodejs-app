@@ -362,7 +362,7 @@ var cronJob = function(){
     // rule.hour = 03;
     // rule.minute = 00;
     rule.hour = 15;
-    rule.minute = 35;
+    rule.minute = 47;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 10 PM');
         AlgoStartTime = Date.now();
@@ -378,8 +378,8 @@ var cronJob = function(){
     //////Server timing - UTC////////
     // rule.hour = 11;
     // rule.minute = 00;
-    rule.hour = 15;
-    rule.minute = 58;
+    rule.hour = 16;
+    rule.minute = 10;
     console.log(rule);
     var ksch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 6 AM');
@@ -806,8 +806,8 @@ var algoTrial = function(){
         var algoTrialFlag = 0;
 
         //fetchArticlesSearchResults var
-        var trialFinalD = [];
-        var flag = 0;
+        // var trialFinalD = [];
+        // var flag = 0;
         //res.json("algooooooooo trialllllllllllllllllllll");
         var myVar  = setInterval(function () {
             if(loopVar >= 161){
@@ -1163,8 +1163,8 @@ var calculateRank = function(){
 }
 //calculateRank();
 
-// var trialFinalD = [];
-// var flag = 0;
+var trialFinalD = [];
+var flag = 0;
 var fetchArticlesSearchResults = function(topNine){
     if(flag == 0){
         var searchTopics = [];
