@@ -1200,7 +1200,8 @@ var fetchArticlesSearchResults = function(topNine){
                 //dateRestrict - Restricts results to URLs based on date
                 //hq - Appends the specified query terms to the query, as if they were combined with a logical AND operator.
                 //safe - Search safety level
-                customsearch.cse.list({ cx: CX, q: query, auth: API_KEY ,dateRestrict: "d1",hq: "Finance",safe: "high"}, function(err, resp) {
+                //,hq: "Finance",safe: "high"
+                customsearch.cse.list({ cx: CX, q: query, auth: API_KEY ,dateRestrict: "d1"}, function(err, resp) {
                     //res.json(resp);
                     finalData.push(resp);
                     if (err) {
