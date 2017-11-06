@@ -360,7 +360,7 @@ var cronJob = function(){
     // rule.hour = 22;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 03;
+    rule.hour = 04;
     rule.minute = 00;
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 10 PM');
@@ -375,7 +375,7 @@ var cronJob = function(){
     // rule.hour = 06;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 11;
+    rule.hour = 12;
     rule.minute = 00;
     console.log(rule);
     var ksch = schedule.scheduleJob(rule, function(){
@@ -390,10 +390,8 @@ var cronJob = function(){
     // rule.hour = 14;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    // rule.hour = 19;
-    // rule.minute = 00;
-    rule.hour = 18;
-    rule.minute = 40;
+    rule.hour = 20;
+    rule.minute = 00;
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
