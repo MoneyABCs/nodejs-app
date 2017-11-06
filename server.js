@@ -392,8 +392,8 @@ var cronJob = function(){
     //////Server timing - UTC////////
     // rule.hour = 19;
     // rule.minute = 00;
-    rule.hour = 17;
-    rule.minute = 30;
+    rule.hour = 18;
+    rule.minute = 40;
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
