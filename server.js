@@ -390,8 +390,10 @@ var cronJob = function(){
     // rule.hour = 14;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 19;
-    rule.minute = 00;
+    // rule.hour = 19;
+    // rule.minute = 00;
+    rule.hour = 17;
+    rule.minute = 30;
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
@@ -788,11 +790,26 @@ finalD = [];
 
 
 var queryData = [],queryName = "";
+//sameday flag to prevent fake daysinlead update since algo runs thrice a day
+var sameday = false;
+var pastdate = new Date().getDate();
 
+console.log("Past date: "+ pastdate);
 finalres = [];
 // var algoTrialFlag1 = 0;
 var algoTrial = function(){
     console.log("inside algo trial");
+    var currdate = new Date().getDate();
+    console.log("Current date: "+ currdate);
+    if(pastdate===currdate)
+    {
+        sameday = true;
+    }
+    else
+    {
+        sameday = false;
+    }
+    console.log("Is it same day:"+sameday);
     // if(algoTrialFlag1 == 0){
         console.log("inside");
         // algoTrialFlag1 = 1;
@@ -1119,14 +1136,15 @@ var calculateRank = function(){
                     data = new ArticleFeaturedResult(trialFinalD[i]);
                     data.save();
                 } else {
-                    console.log(obj.date)
+                    console.log(obj.date);
                     console.log(obj.daysInLead);
                     console.log(trialFinalD[i].date);
-
-                    if(obj.daysInLead >= 35){
-                        trialFinalD[i].daysInLead = 1
-                    } else {
-                        trialFinalD[i].daysInLead = obj.daysInLead + 1;
+                    if(!sameday) {
+                        if (obj.daysInLead >= 35) {
+                            trialFinalD[i].daysInLead = 1
+                        } else {
+                            trialFinalD[i].daysInLead = obj.daysInLead + 1;
+                        }
                     }
                     //here update the values of the articles already in the DB
                     //trialFinalD[i].date = obj.date;
