@@ -793,7 +793,7 @@ var sameday = false;
 var pastdate = new Date().getDate();
 
 console.log("Past date: "+ pastdate);
-finalres = [];
+var finalres = [];
 // var algoTrialFlag1 = 0;
 var algoTrial = function(){
     console.log("inside algo trial");
@@ -1070,7 +1070,7 @@ var setD = function(){
 }
 
 var calculateRank = function(){
-    console.log("inside calculateRank")
+    console.log("inside calculateRank");
     //ArticleFakeResult.find(function(err,data){
     //trialFinalD = data;
     //emptyDB();
@@ -1249,7 +1249,7 @@ var fetchArticlesSearchResults = function(topNine){
                 });
             } else {
                 fs.writeFile('./customsearch.json', JSON.stringify(customjson), 'utf-8', function(err) {
-                    if (err) throw err
+                    if (err) throw err;
                     console.log('customsearch File Done!')
                 })
 
