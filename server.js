@@ -818,7 +818,8 @@ var algoTrial = function(){
         var algoTrialFlag = 0;
 
         //fetchArticlesSearchResults var
-        // var trialFinalD = [];
+        trialFinalD = [];
+        finalres = [];
         // var flag = 0;
         //res.json("algooooooooo trialllllllllllllllllllll");
         var myVar  = setInterval(function () {
@@ -975,7 +976,7 @@ var sortTopics_v2 = function(resObj){
     // console.log(len);
     var res = resObj.default.averages;
     console.log(result);
-    var result = []
+    var result = [];
     var count = 0;
     var obj = {};
     for(var i in res){
@@ -1039,6 +1040,7 @@ var getGlbrank = function(){
 
 //getGlbrank();
 var setD = function(){
+    console.log("trailFinalD length:" + trialFinalD.length);
   /* trialFinalD.sort(function(a,b){
    return new Date(b.date) - new Date(a.date);
    }); */
@@ -1075,7 +1077,7 @@ var calculateRank = function(){
     var alpha = 10000,beta = 1000,gamma = 5000,omega=2000;
     var str,res,val,rank,resp;
     var date1,date2,timeDiff,diffDays;
-    console.log("printing ranks ----------- final value")
+    console.log("printing ranks ----------- final value");
     for(var i=0;i<trialFinalD.length;i++){
         str = trialFinalD[i].date.split("-");
         res = str[0]+str[1]+str[2];
