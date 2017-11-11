@@ -1184,7 +1184,7 @@ var fetchArticlesSearchResults = function(topNine){
     if(flag == 0){
         var searchTopics = [];
         // flag=1;
-        console.log("printing the values of v.........................")
+        console.log("printing the values of v.........................");
         for(var i =0;i<topNine.length;i++){
             console.log("fetchArticlesSearchResults: "+ topNine[i].f)
             searchTopics[i] = topNine[i].f.replace("%20", " ");
