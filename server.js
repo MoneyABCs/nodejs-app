@@ -23,12 +23,14 @@ var alexaData = require('alexa-traffic-rank');
 // app.use(bodyParser.json()); //for parsing app
 // app.use(bodyParser.urlencoded({extended:true})); // for parsing th eapp
 // app.use(multer()); //for parsing multipart
-
+console.log(process.env.OPENSHIFT_MONGODB_DB_URL);
+console.log(process.env.MONGO_URL);
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL || 'mongodb://localhost/moneyabcsdb',
     mongoURLLabel = "";
-
+    console.log("--->>>"+mongoURL);
+console.log("----++"+process.env.DATABASE_SERVICE_NAME);
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
@@ -45,7 +47,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
     // Provide UI label that excludes user id and pw
     mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
-
+    console.log(mongoURL);
   }
 }
 
@@ -67,7 +69,7 @@ var initDb = function(callback) {
     dbDetails.databaseName = "moneyabcsdb";
     dbDetails.url = mongoURLLabel;
     dbDetails.type = 'MongoDB';
-
+      console.log("-----"+mongoURL);
     console.log('Connected to MongoDB at: %s', mongoURL);
   });
 };
@@ -134,30 +136,30 @@ var ArticleResult = mongoose.model('ArticleResult',ArticleSchema);
 var ArticleSchemaFake = new mongoose.Schema({
     title : String,
     iframeLink : String,
-    date:String,
+    date: String,
     snippet : String,
     imgUrl : String,
     displayLink:String, //domain
-    rank : String,
-    globalRank : String,
+    rank : Number,
+    globalRank : Number,
     index : "",
     indexTopic :"",
-    topicRank : ""
+    topicRank : Number
 },{collection : 'articleResFake'}); //override default collection name as web
 var ArticleFakeResult = mongoose.model('ArticleFakeResult',ArticleSchemaFake);
 var ArticleSchema = new mongoose.Schema({
     title : String,
     iframeLink : String,
-    date:String,
+    date: String,
     snippet : String,
     imgUrl : String,
     displayLink:String, //domain
-    rank : String,
-    globalRank : String,
+    rank : Number,
+    globalRank : Number,
     index : "",
     indexTopic :"",
-    topicRank : "",
-    daysInLead : ""
+    topicRank : Number,
+    daysInLead : Number
 },{collection : 'articleFeaturedRes'});
 var ArticleFeaturedResult = mongoose.model('ArticleFeaturedResult',ArticleSchema);
 
@@ -168,7 +170,7 @@ var ArticleSearchFake = new mongoose.Schema({
     _id : { '$oid' : ''},
     title : String,
     iframeLink : String,
-    date:String,
+    date: String,
     snippet : String,
     imgUrl : String,
     displayLink:String,
@@ -184,7 +186,7 @@ var ArticleSearchFake1 = new mongoose.Schema({
     _id : { '$oid' : ''},
     title : String,
     iframeLink : String,
-    date:String,
+    date: String,
     snippet : String,
     imgUrl : String,
     displayLink:String,
@@ -362,10 +364,13 @@ var cronJob = function(){
     //////Server timing - UTC////////
     rule.hour = 04;
     rule.minute = 00;
+
+
     var j = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 10 PM');
         AlgoStartTime = Date.now();
-        algoTrial();
+        // console.log(AlgoStartTime.getHours()+" H "+AlgoStartTime.getMinutes()+ " M "+AlgoStartTime.getSeconds()+ " S ");
+        algoTrial(1);
 
     });
 
@@ -377,11 +382,13 @@ var cronJob = function(){
     //////Server timing - UTC////////
     rule.hour = 12;
     rule.minute = 00;
+
     console.log(rule);
     var ksch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 6 AM');
         AlgoStartTime = Date.now();
-        algoTrial();
+        // console.log(AlgoStartTime.getHours()+" H "+AlgoStartTime.getMinutes()+ " M "+AlgoStartTime.getSeconds()+ " S ");
+        algoTrial(2);
     });
 
     rule = new schedule.RecurrenceRule();
@@ -392,10 +399,12 @@ var cronJob = function(){
     //////Server timing - UTC////////
     rule.hour = 20;
     rule.minute = 00;
+
     var lsch = schedule.scheduleJob(rule, function(){
         console.log('start Algo trail 2 PM');
         AlgoStartTime = Date.now();
-        algoTrial();
+        // console.log(AlgoStartTime.getHours()+" H "+AlgoStartTime.getMinutes()+ " M "+AlgoStartTime.getSeconds()+ " S ");
+        algoTrial(3);
     });
 }
 
@@ -790,22 +799,23 @@ finalD = [];
 var queryData = [],queryName = "";
 //sameday flag to prevent fake daysinlead update since algo runs thrice a day
 var sameday = false;
-var pastdate = new Date().getDate();
-
-console.log("Past date: "+ pastdate);
+// var pastdate = new Date().getDate();
+//
+// console.log("Past date: "+ pastdate);
 var finalres = [];
 // var algoTrialFlag1 = 0;
-var algoTrial = function(){
+var algoTrial = function(indx){
     console.log("inside algo trial");
-    var currdate = new Date().getDate();
-    console.log("Current date: "+ currdate);
-    if(pastdate===currdate)
+    console.log(indx);
+    // var currdate = new Date().getDate();
+    // console.log("Current date: "+ currdate);
+    if(indx === 2)
     {
-        sameday = true;
+        sameday = false;
     }
     else
     {
-        sameday = false;
+        sameday = true;
     }
     console.log("Is it same day:"+sameday);
     // if(algoTrialFlag1 == 0){
@@ -1136,29 +1146,36 @@ var calculateRank = function(){
                     data = new ArticleFeaturedResult(trialFinalD[i]);
                     data.save();
                 } else {
-                    console.log(obj.date);
-                    console.log(obj.daysInLead);
-                    console.log(trialFinalD[i].date);
-                    if(!sameday) {
-                        if (obj.daysInLead >= 35) {
-                            trialFinalD[i].daysInLead = 1
-                        } else {
-                            trialFinalD[i].daysInLead = obj.daysInLead + 1;
-                        }
-                    }
-                    //here update the values of the articles already in the DB
-                    //trialFinalD[i].date = obj.date;
-                    trialFinalD[i].rank -= (omega * Math.log(1 + 1 + trialFinalD[i].topicRank) * trialFinalD[i].daysInLead);
-                    console.log(trialFinalD[i].rank)
-                    console.log(trialFinalD[i].daysInLead);
-                    console.log(trialFinalD[i].date);
-                    ArticleFeaturedResult.update({snippet: snippet}, {
-                        $set: {daysInLead:trialFinalD[i].daysInLead, rank:trialFinalD[i].rank}
-                    }, function(err, numberAffected, rawResponse) {
+                  if (!sameday) {
+                      console.log(obj.date);
+                      console.log(obj.daysInLead);
+                      console.log(trialFinalD[i].date);
+                      console.log(trialFinalD[i].daysInLead);
+
+                      if (obj.daysInLead >= 35) {
+                          trialFinalD[i].daysInLead = 1
+                      } else {
+                          trialFinalD[i].daysInLead = obj.daysInLead + 1;
+                      }
+
+                      //here update the values of the articles already in the DB
+                      //trialFinalD[i].date = obj.date;
+                      trialFinalD[i].rank -= (omega * Math.log(1 + 1 + trialFinalD[i].topicRank) * trialFinalD[i].daysInLead);
+                      console.log(omega)
+                      console.log(trialFinalD[i].topicRank);
+                      console.log("-----------------------")
+
+                      console.log(trialFinalD[i].rank)
+                      console.log(trialFinalD[i].daysInLead);
+                      console.log(trialFinalD[i].date);
+                      ArticleFeaturedResult.update({snippet: snippet}, {
+                        $set: {daysInLead: trialFinalD[i].daysInLead, rank: trialFinalD[i].rank}
+                      }, function (err, numberAffected, rawResponse) {
                         //handle it
                         console.log("duplicate data updated in db");
-                    });
-                    console.log("-------------------------------------------");
+                      });
+                      console.log("-------------------------------------------");
+                    }
                 }
                 console.log("------ end of for single cyscle ------------");
             }
