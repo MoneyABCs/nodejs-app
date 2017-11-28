@@ -239,6 +239,21 @@ var website = [
     ]
     }
 ];
+
+var DailyTrendsSchema = new mongoose.Schema({
+  data: Date,
+  iteration: Number,
+  alltrends: [],
+  toptrends: []
+},{collection : 'dailyTrends'}); //override default collection name as web
+var DailyTrends = mongoose.model('DailyTrends',DailyTrendsSchema);
+var DailyNewsSchema = new mongoose.Schema({
+  data: Date,
+  newsdata: []
+},{collection : 'DailyNews'}); //override default collection name as web
+var DailyNews = mongoose.model('DailyNews',DailyNewsSchema);
+
+
 var testAPi = function(){
 //app.get("/testApi", function (req,res){
     ArticleFeaturedResult.find(function(err,data){
@@ -852,7 +867,18 @@ var algoTrial = function(indx){
                     for(var i =0;i<topNine.length;i++){
                         topNine[i].f = topNine[i].f.replace(/%20/g, " ");
                     }
-                    //console.log(topNine);
+                    console.log(topNine);
+                    //Write trends data into db
+                    //alltrends: finalres
+                    //toptrends: topNine
+                    var todaystrend = new DailyTrends({
+                      date: new Date(),
+                      iteration: indx,
+                      alltrends: finalres,
+                      toptrends: topNine
+                    });
+                    todaystrend.save();
+                    ///
                     fetchArticlesSearchResults(topNine);
                     console.log("time out cleared!");
 
@@ -1070,6 +1096,14 @@ var setD = function(){
             clearInterval(myVar1);
             calculateRank();
             //response.json(trialFinalD);
+            //Write data to DB
+            var todaynews = new DailyNews({
+              date: new Date(),
+              newsdata: trialFinalD
+            });
+            todaynews.save();
+
+            //////////////////
             fs.writeFile('./draftedresult.json', JSON.stringify(trialFinalD), 'utf-8', function(err) {
                 if (err) throw err
                 console.log('draftedresult File Done!')
@@ -1134,8 +1168,9 @@ var calculateRank = function(){
             console.log("inside if line 905 " + trialFinalD.length)
             for(var i = 0;i < trialFinalD.length;i++){
                 snippet = trialFinalD[i].snippet;
+                title = trialFinalD[i].title;
                 obj = myData.filter(function ( obj ) {
-                    return obj.snippet === snippet;
+                    return ((obj.snippet === snippet) || (obj.title === title));
                 })[0];
                 console.log("snippet == " + snippet);
                 if(!obj){
