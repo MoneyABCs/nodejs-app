@@ -274,14 +274,6 @@ $ git push</pre>
                 <p>With the <a href="http://docs.openshift.org/latest/cli_reference/overview.html">OpenShift command line interface</a> (CLI), you can create applications and manage projects from a terminal.</p>
 
                 <h2>Development Resources</h2>
-                  <ul>
-                    <li><a href="http://docs.openshift.org/latest/welcome/index.html">OpenShift Documentation</a></li>
-                    <li><a href="https://github.com/openshift/origin">Openshift Origin GitHub</a></li>
-                    <li><a href="https://github.com/openshift/source-to-image">Source To Image GitHub</a></li>
-                    <li><a href="http://docs.openshift.org/latest/using_images/s2i_images/nodejs.html">Getting Started with Node.js on OpenShift</a></li>
-                    <li><a href="http://stackoverflow.com/questions/tagged/openshift">Stack Overflow questions for OpenShift</a></li>
-                    <li><a href="http://git-scm.com/documentation">Git documentation</a></li>
-                  </ul>
 
                 <h2>Request information</h2>
                 <p>Page view count:
@@ -299,6 +291,18 @@ $ git push</pre>
                    </p>
                 <%} %>
           </section>
+            <section class="col-xs-12 col-sm-6 col-md-6">
+                <h2>Trends information</h2>
+                <% if (toptopics) { %>
+                <div class="code">
+                    <ul>
+                        <% for(var i=0; i<toptopics.length; i++) {%>
+                        <li><span class="code"><%= toptopics[i].topics %></span>--<span><%= toptopics[i].date %></span></li>
+                        <% } %>
+                    </ul>
+                </div>
+                <%} %>
+            </section>
         </div>
 
         <footer>

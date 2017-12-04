@@ -27,7 +27,7 @@ console.log(process.env.OPENSHIFT_MONGODB_DB_URL);
 console.log(process.env.MONGO_URL);
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL , //|| 'mongodb://localhost/moneyabcsdb'
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL, // || 'mongodb://localhost/moneyabcsdb',
     mongoURLLabel = "";
     console.log("--->>>"+mongoURL);
 console.log("----++"+process.env.DATABASE_SERVICE_NAME);
@@ -83,12 +83,33 @@ app.get('/', function (req, res) {
   if (db) {
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
+    console.log("inside...------------")
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
       res.render('index.html', { pageCountMessage : count, dbInfo: dbDetails });
     });
   } else {
-    res.render('index.html', { pageCountMessage : null});
+    var toptrends = [];
+    DailyTrends.find({}).sort({_id: -1}).limit(10).exec(function(err,data){
+      // console.log(data);
+      var toptrends = [];
+      var tmpstr = ''
+
+      // console.log(data._id.getTimestamp());
+      data.forEach(function(datum) {
+        // top9trends[datum.]
+        var tmparr = []
+        //console.log(datum.toptrends);
+        datum.toptrends.forEach(function(item){
+          tmparr.push(item.f);
+        })
+        tmpstr = tmparr.join()
+        toptrends.push({topics: tmpstr, date: datum.createdAt});
+      });
+      res.render('index.html', { pageCountMessage : null, toptopics : toptrends});
+    });
+
+    // res.render('index.html', { pageCountMessage : null, toptopics : toptrends});
   }
 });
 
@@ -109,6 +130,7 @@ app.get('/pagecount', function (req, res) {
 
 
 //algo start
+// var timestamps = require('mongoose-timestamp');
 /*** Construct Schema for website - Start ***/
 var WebsiteSchema = new mongoose.Schema({
     article : String
@@ -129,7 +151,8 @@ var ArticleSchema = new mongoose.Schema({
     snippet : String,
     imgUrl : String
 
-},{collection : 'articleRes'}); //override default collection name as web
+},{timestamps: true, collection : 'articleRes'}); //override default collection name as web
+// ArticleSchema.plugin(timestamps);
 var ArticleResult = mongoose.model('ArticleResult',ArticleSchema);
 
 /*** Construct Schema for search results of 9 articles - Start ***/
@@ -145,7 +168,8 @@ var ArticleSchemaFake = new mongoose.Schema({
     index : "",
     indexTopic :"",
     topicRank : Number
-},{collection : 'articleResFake'}); //override default collection name as web
+},{timestamps: true, collection : 'articleResFake'}); //override default collection name as web
+// ArticleSchemaFake.plugin(timestamps);
 var ArticleFakeResult = mongoose.model('ArticleFakeResult',ArticleSchemaFake);
 var ArticleSchema = new mongoose.Schema({
     title : String,
@@ -160,7 +184,8 @@ var ArticleSchema = new mongoose.Schema({
     indexTopic :"",
     topicRank : Number,
     daysInLead : Number
-},{collection : 'articleFeaturedRes'});
+},{timestamps: true, collection : 'articleFeaturedRes'});
+// ArticleSchema.plugin(timestamps);
 var ArticleFeaturedResult = mongoose.model('ArticleFeaturedResult',ArticleSchema);
 
 /***************/
@@ -179,7 +204,8 @@ var ArticleSearchFake = new mongoose.Schema({
     topicArrIndex :String,
     '__v' : ''
 
-},{collection : 'articleSearchRes'}); //override default collection name as web
+},{timestamps: true, collection : 'articleSearchRes'}); //override default collection name as web
+// ArticleSearchFake.plugin(timestamps);
 var ArticleSearchResult = mongoose.model('ArticleSearchResult',ArticleSearchFake);
 
 var ArticleSearchFake1 = new mongoose.Schema({
@@ -194,7 +220,8 @@ var ArticleSearchFake1 = new mongoose.Schema({
     //globalRank : String, //not required.. compute for cron job algorithm
     index : "",
     '__v' : ''
-},{collection : 'articleSearchRes1'}); //override default collection name as web
+},{timestamps: true, collection : 'articleSearchRes1'}); //override default collection name as web
+// ArticleSearchFake1.plugin(timestamps);
 var ArticleSearchResult1 = mongoose.model('ArticleSearchResult1',ArticleSearchFake1);
 
 /***************/
@@ -245,12 +272,14 @@ var DailyTrendsSchema = new mongoose.Schema({
   iteration: Number,
   alltrends: [],
   toptrends: []
-},{collection : 'dailyTrends'}); //override default collection name as web
+},{timestamps: true, collection : 'dailyTrends'}); //override default collection name as web
+// DailyTrendsSchema.plugin(timestamps);
 var DailyTrends = mongoose.model('DailyTrends',DailyTrendsSchema);
 var DailyNewsSchema = new mongoose.Schema({
   data: Date,
   newsdata: []
-},{collection : 'DailyNews'}); //override default collection name as web
+},{timestamps: true, collection : 'DailyNews'}); //override default collection name as web
+// DailyNewsSchema.plugin(timestamps);
 var DailyNews = mongoose.model('DailyNews',DailyNewsSchema);
 
 
@@ -1113,6 +1142,12 @@ var setD = function(){
     },9000);
 }
 
+function unique_array(a, param){
+  return a.filter(function(item, pos, array){
+    return array.map(function(mapItem){ return mapItem[param]; }).indexOf(item[param]) === pos;
+  })
+}
+
 var calculateRank = function(){
     console.log("inside calculateRank");
     //ArticleFakeResult.find(function(err,data){
@@ -1158,6 +1193,16 @@ var calculateRank = function(){
     trialFinalD.sort(function(a, b) {
         return b.rank - a.rank;
     });
+    // var duplicatecustomdata = trialFinalD.filter(function(a,b){
+    //   return ((b.snippet === a.snippet) || (b.title === a.title))
+    // })
+    // console.log(duplicatecustomdata)
+    console.log("Count:::::::::::::");
+    console.log(trialFinalD.length);
+    trialFinalD = unique_array(trialFinalD, 'title');
+    console.log(trialFinalD.length);
+    trialFinalD = unique_array(trialFinalD, 'snippet');
+    console.log(trialFinalD.length);
     //(trialFinalD.length > 0 ? emptyDB() : "");
     //console.log("DATABASE EMPTIEDDDDDDDDDDDDDDDDDDDD");
 
@@ -1181,6 +1226,7 @@ var calculateRank = function(){
                     data = new ArticleFeaturedResult(trialFinalD[i]);
                     data.save();
                 } else {
+                  console.log("Same Day ::: "+sameday);
                   if (!sameday) {
                       console.log(obj.date);
                       console.log(obj.daysInLead);
