@@ -8,7 +8,7 @@ Object.assign=require('object-assign')
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
 
-var searchTopics = [ {"search_topics_1":"Financial%20Planning"}, {"search_topics_2":"Career%20Planning"}, {"search_topics_3":"Financial%20Planners"}, {"search_topics_4":"Financial%20Goals"}, {"search_topics_5":"Time%20Value%20of%20Money"}, {"search_topics_6":"Money%20Management"}, {"search_topics_7":"Financial%20Record%20System"}, {"search_topics_8":"Personal%20Financial%20Statements"}, {"search_topics_9":"Budgeting"}, {"search_topics_10":"Savings"}, {"search_topics_11":"Payment%20Methods"}, {"search_topics_12":"Bank%20Currency"}, {"search_topics_13":"Insurance%20Companies"}, {"search_topics_14":"Private%20Insurance%20Companies"}, {"search_topics_15":"Financial%20Advisors"},{"search_topics_16":"Career%20Choice"}, {"search_topics_17":"Employment%20Search"}, {"search_topics_18":"Employee%20Benefits"}, {"search_topics_19":"Career%20Development"}, {"search_topics_20":"Taxes"}, {"search_topics_21":"Tax%20Refunds"}, {"search_topics_22":"Tax%20Advance%20Loans"}, {"search_topics_23":"Federal%20Income%20Taxes"}, {"search_topics_24":"Tax%20Deductions"}, {"search_topics_25":"Tax%20Credits"}, {"search_topics_26":"Tax%20Planning"}, {"search_topics_27":"Tax%20Preparers"}, {"search_topics_28":"Tax%20Advisors"}, {"search_topics_29":"Major%20Purchases"}, {"search_topics_30":"Bankers"}, {"search_topics_31":"Consumer%20Credit"}, {"search_topics_32":"Types%20of%20Credit"}, {"search_topics_33":"Revolving%20Loans"}, {"search_topics_34":"Open%20Ended%20Loans"}, {"search_topics_35":"Close%20Ended%20Loans"}, {"search_topics_36":"Revolving%20Loans"}, {"search_topics_37":"Credit%20Capacity"}, {"search_topics_38":"Debt%20History"}, {"search_topics_39":"Applying%20for%20Credit"}, {"search_topics_40":"Interest%20Rates"}, {"search_topics_41":"Credit%20History"}, {"search_topics_42":"Credit%20Scores"}, {"search_topics_43":"Credit%20Counseling"}, {"search_topics_44":"Consumer%20Rights"}, {"search_topics_45":"Predatory%20Lending%20Practices%20"}, {"search_topics_46":"Bank%20Corruption"}, {"search_topics_47":"Title%20Loans"}, {"search_topics_48":"Debt%20Collection"}, {"search_topics_49":"Bankruptcy"}, {"search_topics_50":"Chapter%2011%20Bankruptcy"}, {"search_topics_51":"Pawn%20Shops"}, {"search_topics_52":"Tax%20Advance%20Loans"}, {"search_topics_53":"Payday%20Loans"}, {"search_topics_54":"Rent%20to%20Own"}, {"search_topics_55":"Tax%20Refund%20Anticipation%20Loans"}, {"search_topics_56":"Real%20Estate%20Brokers"}, {"search_topics_57":"Housing"}, {"search_topics_58":"Home%20Buying"}, {"search_topics_59":"Property%20Providers"}, {"search_topics_60":"Brokers%20Price%20Opinio%20BPO"}, {"search_topics_61":"Mortgages"}, {"search_topics_62":"Renting"}, {"search_topics_63":"Homeowners%20Insurance"}, {"search_topics_64":"Property%20Insurance"}, {"search_topics_65":"Mortgage%20Insurance"}, {"search_topics_66":"Renters%20Insurance"}, {"search_topics_67":"Car%20Shopping"}, {"search_topics_68":"Auto%20Loans"}, {"search_topics_69":"Home%20Selling"}, {"search_topics_70":"Liability%20Insurance"}, {"search_topics_71":"Auto%20Insurance"}, {"search_topics_72":"Health%20Plans"}, {"search_topics_73":"Home%20Health%20Care"}, {"search_topics_74":"Health%20Maintenance%20Organizations%20HMOs"}, {"search_topics_75":"Preferred%20Provider%20Organization%20PPOs"}, {"search_topics_76":"Medical%20Service%20Plans"}, {"search_topics_77":"Health%20Insurance"}, {"search_topics_78":"Medical%20Insurance"}, {"search_topics_79":"Medicare"}, {"search_topics_80":"Medicaid"}, {"search_topics_81":"Bodily%20Injury%20Insurance"}, {"search_topics_82":"Short%20Term%20Disability%20Insurance%20"}, {"search_topics_83":"Long%20Term%20Disability%20Insurance%20"}, {"search_topics_84":"Whole%20Life%20Insurance"}, {"search_topics_85":"Turned%20Life%20Insurance"}, {"search_topics_86":"Short%20Term%20Insurance"}, {"search_topics_87":"Term%20Life%20Insurance"}, {"search_topics_88":"Annuities"}, {"search_topics_89":"Insurance%20Beneficiaries%20"}, {"search_topics_90":"Child%20Custody"}, {"search_topics_91":"Custody"}, {"search_topics_92":"Investments"}, {"search_topics_93":"Investment%20Goals"}, {"search_topics_94":"Investment%20Strategies"}, {"search_topics_95":"Investment%20Income"}, {"search_topics_96":"Investment%20Growth"}, {"search_topics_97":"Investment%20Equity"}, {"search_topics_98":"Investment%20Risks"}, {"search_topics_99":"Investment%20Alternatives"}, {"search_topics_100":"Asset%20Allocation"}, {"search_topics_101":"Diversification"}, {"search_topics_102":"Modern%20Markets"}, {"search_topics_103":"Capital%20Markets"}, {"search_topics_104":"Stocks"}, {"search_topics_105":"Mutual%20Funds"}, {"search_topics_106":"Real%20Estate"}, {"search_topics_107":"Real%20Estate%20Investment%20Trusts%20REITs"}, {"search_topics_108":"Common%20Stock"}, {"search_topics_109":"Preferred%20Stock"}, {"search_topics_110":"Corporate%20Bonds"}, {"search_topics_111":"Government%20Bonds"}, {"search_topics_112":"Municipal%20Bonds"}, {"search_topics_113":"Convertible%20Bonds"}, {"search_topics_114":"Exchange%20Traded%20Funds"}, {"search_topics_115":"Index%20Funds"}, {"search_topics_116":"Precious%20Metals"}, {"search_topics_117":"Collectibles"}, {"search_topics_118":"Gold"}, {"search_topics_119":"Stock%20Brokers"}, {"search_topics_120":"Investment%20Bankers"}, {"search_topics_121":"Financial%20Analysts"}, {"search_topics_122":"Retirement"}, {"search_topics_123":"Retirement%20Planning"}, {"search_topics_124":"Retirement%20Housing"}, {"search_topics_125":"Retirement%20Income"}, {"search_topics_126":"Retirement%20Living%20Expenses"}, {"search_topics_127":"Social%20Security"}, {"search_topics_128":"Pensions"}, {"search_topics_129":"Public%20Pensions"}, {"search_topics_130":"Employer%20Pensions"}, {"search_topics_131":"Personal%20Retirement%20Plans"}, {"search_topics_132":"Individual%20Retirement%20Accounts"}, {"search_topics_133":"Roth%20Individual%20Retirement%20Accounts"}, {"search_topics_134":"401%20A"}, {"search_topics_135":"401%20B"}, {"search_topics_136":"401%20K"}, {"search_topics_137":"403%20B"}, {"search_topics_138":"457"}, {"search_topics_139":"Thrift%20Savings%20Plan%20TSP"}, {"search_topics_140":"Retirement%20Employment"}, {"search_topics_141":"Wills"}, {"search_topics_142":"Power%20of%20Attorney"}, {"search_topics_143":"Letter%20of%20Lest%20Instruction"}, {"search_topics_144":"Trusts"}, {"search_topics_145":"Trustees"}, {"search_topics_146":"Estate"}, {"search_topics_147":"Probate"}, {"search_topics_148":"Lawyers"},{"search_topics_149":"debit%20collection"},{"search_topics_150" : "home%20owners%20insurance"},{"search_topics_151" : "estate%20planning"},{"search_topics_152" : "credit%20card"},{"search_topics_153" : "Personal%20Financial%20Planning"},{"search_topics_154" : "Credit%20and%20Loans"},{"search_topics_155" : "Your%20Health%20and%20Life"},{"search_topics_156" : "Investing"},{"search_topics_157" : "Planning%20for%20Retirement%20"},{"search_topics_158":"Wills"}, {"search_topics_159":"Power%20of%20Attorney"}, {"search_topics_160":"Letter%20of%20Lest%20Instruction"}];
+var searchTopics = [ {"search_topics_1":"Financial%20Planning"}, {"search_topics_2":"Career%20Planning"}, {"search_topics_3":"Financial%20Planners"}, {"search_topics_4":"Financial%20Goals"}, {"search_topics_5":"Time%20Value%20of%20Money"}, {"search_topics_6":"Money%20Management"}, {"search_topics_7":"Financial%20Record%20System"}, {"search_topics_8":"Personal%20Financial%20Statements"}, {"search_topics_9":"Budgeting"}, {"search_topics_10":"Savings"}, {"search_topics_11":"Payment%20Methods"}, {"search_topics_12":"Bank%20Currency"}, {"search_topics_13":"Insurance%20Companies"}, {"search_topics_14":"Private%20Insurance%20Companies"}, {"search_topics_15":"Financial%20Advisors"},{"search_topics_16":"Career%20Choice"}, {"search_topics_17":"Employment%20Search"}, {"search_topics_18":"Employee%20Benefits"}, {"search_topics_19":"Career%20Development"}, {"search_topics_20":"Taxes"}, {"search_topics_21":"Tax%20Refunds"}, {"search_topics_22":"Tax%20Advance%20Loans"}, {"search_topics_23":"Federal%20Income%20Taxes"}, {"search_topics_24":"Tax%20Deductions"}, {"search_topics_25":"Tax%20Credits"}, {"search_topics_26":"Tax%20Planning"}, {"search_topics_27":"Tax%20Preparers"}, {"search_topics_28":"Tax%20Advisors"}, {"search_topics_29":"Major%20Purchases"}, {"search_topics_30":"Bankers"}, {"search_topics_31":"Consumer%20Credit"}, {"search_topics_32":"Types%20of%20Credit"}, {"search_topics_33":"Revolving%20Loans"}, {"search_topics_34":"Open%20Ended%20Loans"}, {"search_topics_35":"Close%20Ended%20Loans"}, {"search_topics_36":"Revolving%20Loans"}, {"search_topics_37":"Credit%20Capacity"}, {"search_topics_38":"Debt%20History"}, {"search_topics_39":"Applying%20for%20Credit"}, {"search_topics_40":"Interest%20Rates"}, {"search_topics_41":"Credit%20History"}, {"search_topics_42":"Credit%20Scores"}, {"search_topics_43":"Credit%20Counseling"}, {"search_topics_44":"Consumer%20Rights"}, {"search_topics_45":"Predatory%20Lending%20Practices%20"}, {"search_topics_46":"Bank%20Corruption"}, {"search_topics_47":"Title%20Loans"}, {"search_topics_48":"Debt%20Collection"}, {"search_topics_49":"Bankruptcy"}, {"search_topics_50":"Chapter%2011%20Bankruptcy"}, {"search_topics_51":"Pawn%20Shops"}, {"search_topics_52":"Tax%20Advance%20Loans"}, {"search_topics_53":"Payday%20Loans"}, {"search_topics_54":"Rent%20to%20Own"}, {"search_topics_55":"Tax%20Refund%20Anticipation%20Loans"}, {"search_topics_56":"Real%20Estate%20Brokers"}, {"search_topics_57":"Housing"}, {"search_topics_58":"Home%20Buying"}, {"search_topics_59":"Property%20Providers"}, {"search_topics_60":"Brokers%20Price%20Opinio%20BPO"}, {"search_topics_61":"Mortgages"}, {"search_topics_62":"Renting"}, {"search_topics_63":"Homeowners%20Insurance"}, {"search_topics_64":"Property%20Insurance"}, {"search_topics_65":"Mortgage%20Insurance"}, {"search_topics_66":"Renters%20Insurance"}, {"search_topics_67":"Car%20Shopping"}, {"search_topics_68":"Auto%20Loans"}, {"search_topics_69":"Home%20Selling"}, {"search_topics_70":"Liability%20Insurance"}, {"search_topics_71":"Auto%20Insurance"}, {"search_topics_72":"Health%20Plans"}, {"search_topics_73":"Home%20Health%20Care"}, {"search_topics_74":"Health%20Maintenance%20Organizations%20HMOs"}, {"search_topics_75":"Preferred%20Provider%20Organization%20PPOs"}, {"search_topics_76":"Medical%20Service%20Plans"}, {"search_topics_77":"Health%20Insurance"}, {"search_topics_78":"Medical%20Insurance"}, {"search_topics_79":"Medicare"}, {"search_topics_80":"Medicaid"}, {"search_topics_81":"Bodily%20Injury%20Insurance"}, {"search_topics_82":"Short%20Term%20Disability%20Insurance%20"}, {"search_topics_83":"Long%20Term%20Disability%20Insurance%20"}, {"search_topics_84":"Whole%20Life%20Insurance"}, {"search_topics_85":"Turned%20Life%20Insurance"}, {"search_topics_86":"Short%20Term%20Insurance"}, {"search_topics_87":"Term%20Life%20Insurance"}, {"search_topics_88":"Annuities"}, {"search_topics_89":"Insurance%20Beneficiaries%20"}, {"search_topics_90":"Child%20Custody"}, {"search_topics_91":"Custody"}, {"search_topics_92":"Investments"}, {"search_topics_93":"Investment%20Goals"}, {"search_topics_94":"Investment%20Strategies"}, {"search_topics_95":"Investment%20Income"}, {"search_topics_96":"Investment%20Growth"}, {"search_topics_97":"Investment%20Equity"}, {"search_topics_98":"Investment%20Risks"}, {"search_topics_99":"Investment%20Alternatives"}, {"search_topics_100":"Asset%20Allocation"}, {"search_topics_101":"Diversification"}, {"search_topics_102":"Modern%20Markets"}, {"search_topics_103":"Capital%20Markets"}, {"search_topics_104":"Stocks"}, {"search_topics_105":"Mutual%20Funds"}, {"search_topics_106":"Real%20Estate"}, {"search_topics_107":"Real%20Estate%20Investment%20Trusts%20REITs"}, {"search_topics_108":"Common%20Stock"}, {"search_topics_109":"Preferred%20Stock"}, {"search_topics_110":"Corporate%20Bonds"}, {"search_topics_111":"Government%20Bonds"}, {"search_topics_112":"Municipal%20Bonds"}, {"search_topics_113":"Convertible%20Bonds"}, {"search_topics_114":"Exchange%20Traded%20Funds"}, {"search_topics_115":"Index%20Funds"}, {"search_topics_116":"Precious%20Metals"}, {"search_topics_117":"Collectibles"}, {"search_topics_118":"Gold"}, {"search_topics_119":"Stock%20Brokers"}, {"search_topics_120":"Investment%20Bankers"}, {"search_topics_121":"Financial%20Analysts"}, {"search_topics_122":"Retirement"}, {"search_topics_123":"Retirement%20Planning"}, {"search_topics_124":"Retirement%20Housing"}, {"search_topics_125":"Retirement%20Income"}, {"search_topics_126":"Retirement%20Living%20Expenses"}, {"search_topics_127":"Social%20Security"}, {"search_topics_128":"Pensions"}, {"search_topics_129":"Public%20Pensions"}, {"search_topics_130":"Employer%20Pensions"}, {"search_topics_131":"Personal%20Retirement%20Plans"}, {"search_topics_132":"Individual%20Retirement%20Accounts"}, {"search_topics_133":"Roth%20Individual%20Retirement%20Accounts"}, {"search_topics_134":"401%20A"}, {"search_topics_135":"401%20B"}, {"search_topics_136":"401%20K"}, {"search_topics_137":"403%20B"}, {"search_topics_138":"457"}, {"search_topics_139":"Thrift%20Savings%20Plan%20TSP"}, {"search_topics_140":"Retirement%20Employment"}, {"search_topics_141":"Wills"}, {"search_topics_142":"Power%20of%20Attorney"}, {"search_topics_143":"Letter%20of%20Lest%20Instruction"}, {"search_topics_144":"Trusts"}, {"search_topics_145":"Trustees"}, {"search_topics_146":"Estate"}, {"search_topics_147":"Probate"}, {"search_topics_148":"Lawyers"},{"search_topics_149":"debt%20collection"},{"search_topics_150" : "home%20owners%20insurance"},{"search_topics_151" : "estate%20planning"},{"search_topics_152" : "credit%20card"},{"search_topics_153" : "Personal%20Financial%20Planning"},{"search_topics_154" : "Credit%20and%20Loans"},{"search_topics_155" : "Your%20Health%20and%20Life"},{"search_topics_156" : "Investing"},{"search_topics_157" : "Planning%20for%20Retirement%20"},{"search_topics_158":"Wills"}, {"search_topics_159":"Power%20of%20Attorney"}]; //, {"search_topics_160":"Letter%20of%20Lest%20Instruction"}
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
@@ -27,7 +27,7 @@ console.log(process.env.OPENSHIFT_MONGODB_DB_URL);
 console.log(process.env.MONGO_URL);
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL, // || 'mongodb://localhost/moneyabcsdb',
+    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL || 'mongodb://localhost/moneyabcsdb',
     mongoURLLabel = "";
     console.log("--->>>"+mongoURL);
 console.log("----++"+process.env.DATABASE_SERVICE_NAME);
@@ -406,7 +406,7 @@ var cronJob = function(){
     // rule.hour = 22;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 04;
+    rule.hour = 12;
     rule.minute = 00;
 
 
@@ -418,38 +418,38 @@ var cronJob = function(){
 
     });
 
-    rule = new schedule.RecurrenceRule();
-    rule.dayOfWeek = new schedule.Range(0, 6);
-    //////CST////////
-    // rule.hour = 06;
+    // rule = new schedule.RecurrenceRule();
+    // rule.dayOfWeek = new schedule.Range(0, 6);
+    // //////CST////////
+    // // rule.hour = 06;
+    // // rule.minute = 00;
+    // //////Server timing - UTC////////
+    // rule.hour = 12;
     // rule.minute = 00;
-    //////Server timing - UTC////////
-    rule.hour = 12;
-    rule.minute = 00;
-
-    console.log(rule);
-    var ksch = schedule.scheduleJob(rule, function(){
-        console.log('start Algo trail 6 AM');
-        AlgoStartTime = Date.now();
-        // console.log(AlgoStartTime.getHours()+" H "+AlgoStartTime.getMinutes()+ " M "+AlgoStartTime.getSeconds()+ " S ");
-        algoTrial(2);
-    });
-
-    rule = new schedule.RecurrenceRule();
-    rule.dayOfWeek = new schedule.Range(0, 6);
-    //////CST////////
-    // rule.hour = 14;
-    // rule.minute = 00;
-    //////Server timing - UTC////////
-    rule.hour = 20;
-    rule.minute = 00;
-
-    var lsch = schedule.scheduleJob(rule, function(){
-        console.log('start Algo trail 2 PM');
-        AlgoStartTime = Date.now();
-        // console.log(AlgoStartTime.getHours()+" H "+AlgoStartTime.getMinutes()+ " M "+AlgoStartTime.getSeconds()+ " S ");
-        algoTrial(3);
-    });
+    //
+    // console.log(rule);
+    // var ksch = schedule.scheduleJob(rule, function(){
+    //     console.log('start Algo trail 6 AM');
+    //     AlgoStartTime = Date.now();
+    //     // console.log(AlgoStartTime.getHours()+" H "+AlgoStartTime.getMinutes()+ " M "+AlgoStartTime.getSeconds()+ " S ");
+    //     algoTrial(2);
+    // });
+    //
+    // rule = new schedule.RecurrenceRule();
+    // rule.dayOfWeek = new schedule.Range(0, 6);
+    // //////CST////////
+    // // rule.hour = 14;
+    // // rule.minute = 00;
+    // //////Server timing - UTC////////
+    // rule.hour = 18;
+    // rule.minute = 10;
+    //
+    // var lsch = schedule.scheduleJob(rule, function(){
+    //     console.log('start Algo trail 2 PM');
+    //     AlgoStartTime = Date.now();
+    //     // console.log(AlgoStartTime.getHours()+" H "+AlgoStartTime.getMinutes()+ " M "+AlgoStartTime.getSeconds()+ " S ");
+    //     algoTrial(3);
+    // });
 }
 
 cronJob();
@@ -842,7 +842,7 @@ finalD = [];
 
 var queryData = [],queryName = "";
 //sameday flag to prevent fake daysinlead update since algo runs thrice a day
-var sameday = false;
+// var sameday = false;
 // var pastdate = new Date().getDate();
 //
 // console.log("Past date: "+ pastdate);
@@ -850,18 +850,18 @@ var finalres = [];
 // var algoTrialFlag1 = 0;
 var algoTrial = function(indx){
     console.log("inside algo trial");
-    console.log(indx);
+    // console.log(indx);
     // var currdate = new Date().getDate();
     // console.log("Current date: "+ currdate);
-    if(indx === 2)
-    {
-        sameday = false;
-    }
-    else
-    {
-        sameday = true;
-    }
-    console.log("Is it same day:"+sameday);
+    // if(indx === 2)
+    // {
+    //     sameday = false;
+    // }
+    // else
+    // {
+    //     sameday = true;
+    // }
+    // console.log("Is it same day:"+sameday);
     // if(algoTrialFlag1 == 0){
         console.log("inside");
         // algoTrialFlag1 = 1;
@@ -892,7 +892,7 @@ var algoTrial = function(indx){
                     finalres.sort(function(a, b) {
                         return parseFloat(b.v) - parseFloat(a.v);
                     });
-                    var topNine = finalres.splice(0,9);
+                    var topNine = finalres.splice(0,30);
                     for(var i =0;i<topNine.length;i++){
                         topNine[i].f = topNine[i].f.replace(/%20/g, " ");
                     }
@@ -1158,6 +1158,7 @@ var calculateRank = function(){
     var date1,date2,timeDiff,diffDays;
     console.log("printing ranks ----------- final value");
     for(var i=0;i<trialFinalD.length;i++){
+        console.log("****************************************************************************");
         str = trialFinalD[i].date.split("-");
         res = str[0]+str[1]+str[2];
         date2 = new Date((new Date().getFullYear())+"-"+("0" + (new Date().getMonth() + 1)).slice(-2)+"-"+ ("0" + new Date().getDate()).slice(-2)); //current date
@@ -1171,6 +1172,7 @@ var calculateRank = function(){
             console.log(timeDiff);
             diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
             console.log(diffDays);
+            console.log("*&***************************************************************************")
         } else {
             diffDays = 10;
             trialFinalD[i].date = (new Date().getFullYear())+"-"+("0" + (new Date().getMonth() + 1)).slice(-2)+"-"+ ("0" + new Date().getDate()).slice(-2);
@@ -1226,8 +1228,8 @@ var calculateRank = function(){
                     data = new ArticleFeaturedResult(trialFinalD[i]);
                     data.save();
                 } else {
-                  console.log("Same Day ::: "+sameday);
-                  if (!sameday) {
+                  // console.log("Same Day ::: "+sameday);
+                  // if (!sameday) {
                       console.log(obj.date);
                       console.log(obj.daysInLead);
                       console.log(trialFinalD[i].date);
@@ -1235,8 +1237,12 @@ var calculateRank = function(){
 
                       if (obj.daysInLead >= 35) {
                           trialFinalD[i].daysInLead = 1
-                      } else {
-                          trialFinalD[i].daysInLead = obj.daysInLead + 1;
+                      }
+                      // else if(sameday){
+                      //   trialFinalD[i].daysInLead = obj.daysInLead;
+                      // }
+                      else{
+                        trialFinalD[i].daysInLead = obj.daysInLead + 1;
                       }
 
                       //here update the values of the articles already in the DB
@@ -1256,7 +1262,7 @@ var calculateRank = function(){
                         console.log("duplicate data updated in db");
                       });
                       console.log("-------------------------------------------");
-                    }
+                    // }
                 }
                 console.log("------ end of for single cyscle ------------");
             }
