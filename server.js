@@ -406,8 +406,8 @@ var cronJob = function(){
     // rule.hour = 22;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 11;
-    rule.minute = 00;
+    rule.hour = 04;
+    rule.minute = 38;
 
 
     var j = schedule.scheduleJob(rule, function(){
@@ -480,9 +480,10 @@ cronJob();
 var GoogleSearch = require('google-search');
 var customsearch = google.customsearch('v1');
 //https://developers.google.com/custom-search/json-api/v1/reference/cse/list
-const CX =  '013944438288227651400:j_0h0-dl6um'; //'009350078174429104185:0ikpzx1qvau'; //'009350078174429104185:ipchhljo5xm';   // search engine ID
+const CX =  '001608963935857061262:cmdf5azij-e';//'013944438288227651400:j_0h0-dl6um'; //'009350078174429104185:0ikpzx1qvau'; //'009350078174429104185:ipchhljo5xm';   // search engine ID
 // //const API_KEY = 'AIzaSyAWZQCb6PFB1Oq1ZqUR6oJLhgwiTlgIKeY';
-const API_KEY = 'AIzaSyD_65dKKxS7Ah2-PEJGYq0UnGJj3eMME8Y';
+const API_KEY = 'AIzaSyABSjOOr9djNIU6fTRI_K308PaJgWzh2Jk';
+//const API_KEY = 'AIzaSyD_65dKKxS7Ah2-PEJGYq0UnGJj3eMME8Y';
 
 //browser key
 var searchObj = [
@@ -892,7 +893,7 @@ var algoTrial = function(indx){
                     finalres.sort(function(a, b) {
                         return parseFloat(b.v) - parseFloat(a.v);
                     });
-                    var topNine = finalres.splice(0,30);
+                    var topNine = finalres;//finalres.splice(0,30);
                     for(var i =0;i<topNine.length;i++){
                         topNine[i].f = topNine[i].f.replace(/%20/g, " ");
                     }
