@@ -406,8 +406,8 @@ var cronJob = function(){
     // rule.hour = 22;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 13;
-    rule.minute = 52;
+    rule.hour = 11;
+    rule.minute = 00;
 
 
     var j = schedule.scheduleJob(rule, function(){
@@ -893,7 +893,7 @@ var algoTrial = function(indx){
                     finalres.sort(function(a, b) {
                         return parseFloat(b.v) - parseFloat(a.v);
                     });
-                    var topNine = finalres.splice(0,50);//finalres;//finalres.splice(0,30);
+                    var topNine = finalres.splice(0,100);//finalres;//finalres.splice(0,30);
                     for(var i =0;i<topNine.length;i++){
                         topNine[i].f = topNine[i].f.replace(/%20/g, " ");
                     }
