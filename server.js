@@ -406,8 +406,8 @@ var cronJob = function(){
     // rule.hour = 22;
     // rule.minute = 00;
     //////Server timing - UTC////////
-    rule.hour = 21;
-    rule.minute = 54;
+    rule.hour = 11;
+    rule.minute = 00;
 
 
     var j = schedule.scheduleJob(rule, function(){
